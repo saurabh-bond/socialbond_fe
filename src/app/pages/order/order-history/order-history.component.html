@@ -1,0 +1,72 @@
+<!--begin::Card-->
+<div class="card">
+  <!--begin::Card header-->
+  <div class="card-header border-0 pt-6">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+          </svg>
+        </span>
+        <!--end::Svg Icon-->
+        <input type="text" data-kt-subscription-table-filter="search"
+          (input)="searchOrders()"
+          id="searchOrders"
+          class="form-control form-control-solid w-250px ps-14"
+          placeholder="Search Orders"/>
+      </div>
+      <!--end::Search-->
+    </div>
+    <!--begin::Card title-->
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar">
+      <!--begin::Toolbar-->
+      <div class="d-flex justify-content-end" data-kt-subscription-table-toolbar="base">
+        <!--begin::Refresh-->
+        <button type="button" class="btn btn-light-primary me-3"
+          (click)="refreshCells()"
+        >
+          <span class="svg-icon svg-icon-primary svg-icon-2x">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <rect x="0" y="0" width="24" height="24"/>
+                <path d="M12,8 L8,8 C5.790861,8 4,9.790861 4,12 L4,13 C4,14.6568542 5.34314575,16 7,16 L7,18 C4.23857625,18 2,15.7614237 2,13 L2,12 C2,8.6862915 4.6862915,6 8,6 L12,6 L12,4.72799742 C12,4.62015048 12.0348702,4.51519416 12.0994077,4.42878885 C12.264656,4.2075478 12.5779675,4.16215674 12.7992086,4.32740507 L15.656242,6.46136716 C15.6951359,6.49041758 15.7295917,6.52497737 15.7585249,6.56395854 C15.9231063,6.78569617 15.876772,7.09886961 15.6550344,7.263451 L12.798001,9.3840407 C12.7118152,9.44801079 12.607332,9.48254921 12.5,9.48254921 C12.2238576,9.48254921 12,9.25869158 12,8.98254921 L12,8 Z" fill="#000000"/>
+                <path d="M12.0583175,16 L16,16 C18.209139,16 20,14.209139 20,12 L20,11 C20,9.34314575 18.6568542,8 17,8 L17,6 C19.7614237,6 22,8.23857625 22,11 L22,12 C22,15.3137085 19.3137085,18 16,18 L12.0583175,18 L12.0583175,18.9825492 C12.0583175,19.2586916 11.8344599,19.4825492 11.5583175,19.4825492 C11.4509855,19.4825492 11.3465023,19.4480108 11.2603165,19.3840407 L8.40328311,17.263451 C8.18154548,17.0988696 8.13521119,16.7856962 8.29979258,16.5639585 C8.32872576,16.5249774 8.36318164,16.4904176 8.40207551,16.4613672 L11.2591089,14.3274051 C11.48035,14.1621567 11.7936615,14.2075478 11.9589099,14.4287888 C12.0234473,14.5151942 12.0583175,14.6201505 12.0583175,14.7279974 L12.0583175,16 Z" fill="#000000" opacity="0.3"/>
+              </g>
+            </svg>
+          </span>
+        </button>
+        <!--end::Refresh-->
+      </div>
+      <!--end::Toolbar-->
+      <!--begin::Group actions-->
+      <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
+        <div class="fw-bolder me-5">
+        <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
+        <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
+      </div>
+      <!--end::Group actions-->
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+  <!--end::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body pt-0">
+    <ag-grid-angular
+        style="width: 100%; height: 450px;"
+        class="ag-theme-alpine"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [suppressRowClickSelection]="true"
+        [rowSelection]="rowSelection"
+        [rowData]="rowData"
+        [enableCellChangeFlash]="true"
+        (gridReady)="onGridReady($event)"
+    ></ag-grid-angular>
+  </div>
+</div>
