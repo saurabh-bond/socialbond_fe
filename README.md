@@ -1,5 +1,14 @@
 # SOCIALBOND_FE
 
+# For Running Project locally
+
+## clone the project using below command
+
+- git clone https://github.com/saurabh-bond/socialbond_fe.git frontend
+- cd frontend
+- npm install
+- ng s
+
 This project was generated with
 [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
 
