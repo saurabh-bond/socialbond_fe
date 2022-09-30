@@ -16,7 +16,6 @@ import { Step4Component } from './add-order/steps/step4/step4.component';
 import { Step5Component } from './add-order/steps/step5/step5.component';
 
 import { OrderHistoryComponent } from './order-history/order-history.component';
-import { TableTestComponent } from './table-test/table-test.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import { TableTestComponent } from './table-test/table-test.component';
     Step3Component,
     Step4Component,
     Step5Component,
-    OrderHistoryComponent,
-    TableTestComponent
+    OrderHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -37,8 +35,7 @@ import { TableTestComponent } from './table-test/table-test.component';
     NgbTooltipModule,
     RouterModule.forChild([
       { path: 'add', component: AddOrderComponent },
-      { path: 'history', component: OrderHistoryComponent },
-      { path: 'table-test', component: TableTestComponent }
+      { path: 'history', component: OrderHistoryComponent }
     ]),
     CardsModule,
     DataTablesModule,
