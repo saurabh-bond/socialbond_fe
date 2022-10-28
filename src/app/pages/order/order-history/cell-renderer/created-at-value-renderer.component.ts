@@ -23,7 +23,6 @@ export class CreatedAtValueRenderer implements ICellRendererAngularComp {
   }
 
   getValueToDisplay(params: ICellRendererParams) {
-    console.log('Calling function ....');
     // let relativeTime = Helpers.getRelativeTime(params.value);
     return params.value ? new Date(params.value).toLocaleString() : '-';
   }
