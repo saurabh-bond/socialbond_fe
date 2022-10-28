@@ -42,7 +42,6 @@ export class LinkValueRenderer implements ICellRendererAngularComp {
   }
 
   getValueToDisplay(params: ICellRendererParams) {
-    console.log('Calling function ....');
     // let relativeTime = Helpers.getRelativeTime(params.value);
     return params.value ? params.value : '-';
   }
