@@ -3,8 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { IApiResponse } from 'src/app/modules/interfaces/api-response';
 import { Observable, Subject } from 'rxjs';
 import { IAddOrder } from './add-order/add-order.helper';
+import { environment } from '../../../environments/environment';
 
-const API_URL = 'http://localhost:3000/api/v1';
+const API_URL = environment.apiUrl;
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
@@ -49,8 +50,9 @@ export class OrderService {
         run: orderRequestData.splitOrders.run,
         interval: orderRequestData.splitOrders.interval
       },
-      start_time: (orderRequestData.scheduleOrdersSet) ?
-        Math.floor(new Date(orderRequestData.scheduleOrders).getTime() / 1000) : null
+      start_time: orderRequestData.scheduleOrdersSet
+        ? Math.floor(new Date(orderRequestData.scheduleOrders).getTime() / 1000)
+        : null
     };
     return this.http.post<IApiResponse>(`${API_URL}/placeOrder`, postData);
   }

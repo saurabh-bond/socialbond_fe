@@ -136,32 +136,7 @@
             <!--begin::Row-->
             <div class="row g-5">
               <!--begin::Col-->
-              <div class="col-6" *ngFor="let demo of appDemos | keyvalue">
-                <!--begin::Demo-->
-                <div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
-                  <ng-container *ngIf="demo.value.published === true; else unpublished">
-                    <div class="overlay-wrapper">
-                      <img src="{{ demo.value.thumbnail }}" alt="demo" class="w-100"/>
-                    </div>
 
-                    <div class="overlay-layer bg-dark bg-opacity-10">
-                      <a href="https://preview.keenthemes.com/metronic8/angular/{{ demo.key }}" class="btn btn-sm btn-success shadow">{{ demo.value.title }}</a>
-                    </div>
-                  </ng-container>
-
-                  <ng-template #unpublished>
-                    <div class="overlay-wrapper">
-                      <img src="{{ demo.value.thumbnail }}" alt="demo" class="w-100 opacity-25"/>
-                    </div>
-
-                    <div class="overlay-layer bg-dark bg-opacity-10">
-                      <div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">Coming soon</div>
-                    </div>
-                  </ng-template>
-
-                </div>
-                <!--end::Demo-->
-              </div>
               <!--end::Col-->
             </div>
             <!--end::Row-->
