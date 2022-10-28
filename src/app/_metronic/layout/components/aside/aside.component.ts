@@ -3,7 +3,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,19 +13,19 @@ import {
   MenuComponent,
   DrawerComponent,
   ToggleComponent,
-  ScrollComponent,
+  ScrollComponent
 } from '../../../kt/components';
 
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.scss'],
+  styleUrls: ['./aside.component.scss']
 })
 export class AsideComponent implements OnInit, OnDestroy {
   asideTheme: string = '';
   asideMinimize: boolean = false;
   asideMenuCSSClasses: string = '';
-  appPreviewDocsUrl: string = environment.appPreviewDocsUrl;
+  appPreviewDocsUrl: string = '';
   @ViewChild('ktAsideScroll', { static: true }) ktAsideScroll: ElementRef;
   private unsubscribe: Subscription[] = [];
 
