@@ -5,10 +5,10 @@
 export const environment = {
   production: true,
   appVersion: 'v8.0.37',
+  authTokenName: 'x-auth-token',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  authTokenName: 'x-auth-token',
-  apiUrl: 'http://localhost:3000/api/v1',
+  apiUrl: 'http://3.84.34.248/api/api/v1',
   appThemeName: 'SocialBond'
 };
 
