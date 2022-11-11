@@ -1,7 +1,19 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
+# folders not required for release branch
+/src
+tsconfig*.json
+yarn.lock
+README.md
+package*.json
+ngcc.config.js
+LICENSE
+karma.conf.js
+angular.json
+.prettierrc
+.editorconfig
+.browserslistrc
 
 # compiled output
-/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run

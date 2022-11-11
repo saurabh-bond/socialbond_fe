@@ -8,7 +8,7 @@ export const environment = {
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
   authTokenName: 'x-auth-token',
-  apiUrl: 'http://localhost:3000/api/v1',
+  apiUrl: 'http://3.86.180.231/api/api/v1',
   appThemeName: 'SocialBond'
 };
 
