@@ -13,6 +13,20 @@ angular.json
 .editorconfig
 .browserlistrc
 
+# folders not required for release branch
+/src
+tsconfig*.json
+yarn.lock
+README.md
+package*.json
+ngcc.config.js
+LICENSE
+karma.conf.js
+angular.json
+.prettierrc
+.editorconfig
+.browserlistrc
+
 # compiled output
 /tmp
 /out-tsc
