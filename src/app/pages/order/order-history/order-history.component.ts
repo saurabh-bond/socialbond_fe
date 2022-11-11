@@ -7,6 +7,7 @@ import { CreatedAtValueRenderer } from './cell-renderer/created-at-value-rendere
 import { LinkValueRenderer } from './cell-renderer/link-value-renderer.component';
 import { StatusValueRenderer } from './cell-renderer/status-value-renderer.component';
 import { UpdatedAtValueRenderer } from './cell-renderer/updated-at-value-renderer.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-order-history',
@@ -99,7 +100,7 @@ export class OrderHistoryComponent {
 
   dataCall() {
     this.http
-      .post<any>('http://localhost:3000/api/v1/orderHistory', {})
+      .post<any>(`${environment.apiUrl}/orderHistory`, {})
       .subscribe((data) => {
         // var idSequence = 1;
         // data.data.forEach(function (item: any) {
