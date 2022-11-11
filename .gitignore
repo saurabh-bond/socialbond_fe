@@ -11,6 +11,7 @@ karma.conf.js
 angular.json
 .prettierrc
 .editorconfig
+<<<<<<< HEAD
 .browserlistrc
 
 # folders not required for release branch
@@ -26,6 +27,9 @@ angular.json
 .prettierrc
 .editorconfig
 .browserlistrc
+=======
+.browserslistrc
+>>>>>>> aae8f6d (updated dist folder)
 
 # compiled output
 /tmp
