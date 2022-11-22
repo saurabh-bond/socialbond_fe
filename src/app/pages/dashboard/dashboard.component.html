@@ -1,5 +1,179 @@
 <!-- begin::Row -->
 <div class="row gy-5 g-xl-8">
+  <div class="col-xl-4 mb-xl-10">
+    <!--begin::Lists Widget 19-->
+    <div class="card card-flush h-xl-100" *ngIf="orderCount$ | async as _orderCount">
+      <!--begin::Heading-->
+      <div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px" style="background-image:url('/assets/media/shapes/top-green.png')">
+        <!--begin::Title-->
+        <h3 class="card-title align-items-start flex-column text-white pt-15"
+          *ngIf="user$ | async as _user"
+        >
+          <span class="fw-bolder fs-2x mb-3">Hello, {{ _user.name }} </span>
+          <div class="fs-4 text-white">
+            <span class="opacity-75">There are </span>
+            <span class="position-relative d-inline-block">
+              <a href="/order/history" class="link-white opacity-75-hover fw-bolder d-block mb-1">
+                {{ _orderCount.ordersToComplete }}  orders
+              </a>
+              <!--begin::Separator-->
+              <span class="position-absolute opacity-50 bottom-0 start-0 border-2 border-white border-bottom w-100"></span>
+              <!--end::Separator-->
+            </span>
+            <span class="opacity-75"> to comlete</span>
+          </div>
+        </h3>
+        <!--end::Title-->
+      </div>
+      <!--end::Heading-->
+      <!--begin::Body-->
+      <div class="card-body mt-n20">
+        <!--begin::Stats-->
+        <div class="mt-n20 position-relative">
+          <!--begin::Row-->
+          <div class="row g-3 g-lg-6">
+            <!--begin::Col-->
+            <div class="col-6">
+              <!--begin::Items-->
+              <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
+                <!--begin::Symbol-->
+                <div class="symbol symbol-30px me-5 mb-8">
+                  <span class="symbol-label">
+                    <span [inlineSVG]="'/assets/media/icons/duotune/general/gen013.svg'"
+                      class="svg-icon svg-icon-1 svg-icon-primary"
+                    ></span>
+                    <!--end::Svg Icon-->
+                  </span>
+                </div>
+                <!--end::Symbol-->
+                <!--begin::Stats-->
+                <div class="m-0">
+                  <!--begin::Number-->
+                  <span [countUp]="_orderCount.pending" [options]="animateCountUpOptions"
+                    class="text-gray-700 fw-boldest d-block fs-2qx lh-1 ls-n1 mb-1">
+                    {{ _orderCount.pending }}
+                  </span>
+                  <!--end::Number-->
+                  <!--begin::Desc-->
+                  <span class="text-gray-500 fw-bold fs-6">Pending</span>
+                  <!--end::Desc-->
+                </div>
+                <!--end::Stats-->
+              </div>
+              <!--end::Items-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-6">
+              <!--begin::Items-->
+              <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
+                <!--begin::Symbol-->
+                <div class="symbol symbol-30px me-5 mb-8">
+                  <span class="symbol-label">
+                    <!--begin::Svg Icon | path: icons/duotune/finance/fin001.svg-->
+                    <span [inlineSVG]="'/assets/media/icons/duotune/general/gen012.svg'"
+                      class="svg-icon svg-icon-1 svg-icon-primary"
+                    ></span>
+                    <!--end::Svg Icon-->
+                  </span>
+                </div>
+                <!--end::Symbol-->
+                <!--begin::Stats-->
+                <div class="m-0">
+                  <!--begin::Number-->
+                  <!-- <h1 [countUp]="122" [options]="{ enableScrollSpy: true }">0</h1>
+                  <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">0</div> -->
+                  <span [countUp]="_orderCount.processing" [options]="animateCountUpOptions"
+                    class="text-gray-700 fw-boldest d-block fs-2qx lh-1 ls-n1 mb-1">
+                    {{ _orderCount.processing }}
+                  </span>
+                  <!--end::Number-->
+                  <!--begin::Desc-->
+                  <span class="text-gray-500 fw-bold fs-6">Processing</span>
+                  <!--end::Desc-->
+                </div>
+                <!--end::Stats-->
+              </div>
+              <!--end::Items-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-6">
+              <!--begin::Items-->
+              <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
+                <!--begin::Symbol-->
+                <div class="symbol symbol-30px me-5 mb-8">
+                  <span class="symbol-label">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen020.svg-->
+                    <span [inlineSVG]="'/assets/media/icons/duotune/general/gen034.svg'"
+                      class="svg-icon svg-icon-1 svg-icon-danger"
+                    ></span>
+                    <!--end::Svg Icon-->
+                  </span>
+                </div>
+                <!--end::Symbol-->
+                <!--begin::Stats-->
+                <div class="m-0">
+                  <!--begin::Number-->
+                  <span [countUp]="_orderCount.cancelled" [options]="animateCountUpOptions"
+                    class="text-gray-700 fw-boldest d-block fs-2qx lh-1 ls-n1 mb-1">
+                    {{ _orderCount.cancelled }}
+                  </span>
+                  <!--end::Number-->
+                  <!--begin::Desc-->
+                  <span class="text-gray-500 fw-bold fs-6">Cancelled</span>
+                  <!--end::Desc-->
+                </div>
+                <!--end::Stats-->
+              </div>
+              <!--end::Items-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-6">
+              <!--begin::Items-->
+              <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
+                <!--begin::Symbol-->
+                <div class="symbol symbol-30px me-5 mb-8">
+                  <span class="symbol-label">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen013.svg-->
+                    <span [inlineSVG]="'/assets/media/icons/duotune/general/gen043.svg'"
+                      class="svg-icon svg-icon-1 svg-icon-success"
+                    ></span>
+                    <!--end::Svg Icon-->
+                  </span>
+                </div>
+                <!--end::Symbol-->
+                <!--begin::Stats-->
+                <div class="m-0">
+                  <!--begin::Number-->
+                  <span [countUp]="_orderCount.completed" [options]="animateCountUpOptions"
+                    class="text-gray-700 fw-boldest d-block fs-2qx lh-1 ls-n1 mb-1">
+                    {{ _orderCount.completed }}
+                  </span>
+                  <!--end::Number-->
+                  <!--begin::Desc-->
+                  <span class="text-gray-500 fw-bold fs-6">Completed</span>
+                  <!--end::Desc-->
+                </div>
+                <!--end::Stats-->
+              </div>
+              <!--end::Items-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Row-->
+        </div>
+        <!--end::Stats-->
+      </div>
+      <!--end::Body-->
+    </div>
+    <!--end::Lists Widget 19-->
+  </div>
+
+  <div class="col-xxl-4">
+    <app-lists-widget5 class="card card-xxl-stretch"></app-lists-widget5>
+  </div>
   <div class="col-xxl-4">
     <app-mixed-widget2
       class="card card-xl-stretch mb-xl-8"
@@ -7,9 +181,6 @@
       chartHeight="200px"
       strokeColor="#cb1e46"
     ></app-mixed-widget2>
-  </div>
-  <div class="col-xxl-4">
-    <app-lists-widget5 class="card card-xxl-stretch"></app-lists-widget5>
   </div>
   <div class="col-xxl-4">
     <app-mixed-widget10

@@ -47,6 +47,7 @@
     "ng-apexcharts": "^1.5.12",
     "ng-inline-svg": "^13.0.0",
     "ngx-clipboard": "^14.0.1",
+    "ngx-countup": "^7.3.3",
     "ngx-toastr": "^14.2.4",
     "nouislider": "^15.2.0",
     "object-path": "^0.11.5",

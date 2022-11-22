@@ -1,17 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { IApiResponse } from 'src/app/modules/interfaces/api-response';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IAddOrder } from './add-order/add-order.helper';
 import { environment } from '../../../environments/environment';
+import { IOrderCount } from 'src/app/modules/interfaces/orderCount';
+import { map } from 'rxjs/operators';
 
 const API_URL = environment.apiUrl;
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
   filteredServices = new Subject();
+  orderCountSubject: BehaviorSubject<IOrderCount>;
+  orderCount$: Observable<IOrderCount>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getUserOrderCount().subscribe((data) => {
+      this.orderCountSubject.next(data.data);
+    });
+    this.orderCountSubject = new BehaviorSubject<IOrderCount>(undefined);
+    this.orderCount$ = this.orderCountSubject.asObservable();
+  }
 
   getServiceCategories(): Observable<IApiResponse> {
     return this.http.get<IApiResponse>(`${API_URL}/getServiceCategories`);
@@ -55,5 +65,9 @@ export class OrderService {
         : null
     };
     return this.http.post<IApiResponse>(`${API_URL}/placeOrder`, postData);
+  }
+
+  getUserOrderCount() {
+    return this.http.get<IApiResponse>(`${API_URL}/getUserOrderCount`);
   }
 }
