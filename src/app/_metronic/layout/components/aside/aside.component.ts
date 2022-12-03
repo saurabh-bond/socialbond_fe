@@ -25,7 +25,8 @@ export class AsideComponent implements OnInit, OnDestroy {
   asideTheme: string = '';
   asideMinimize: boolean = false;
   asideMenuCSSClasses: string = '';
-  appPreviewDocsUrl: string = '';
+  appPreviewDocsUrl: string =
+    'https://merchant.razorpay.com/policy/KnW0ctDvdahphe/terms';
   @ViewChild('ktAsideScroll', { static: true }) ktAsideScroll: ElementRef;
   private unsubscribe: Subscription[] = [];
 
