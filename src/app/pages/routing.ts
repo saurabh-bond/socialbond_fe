@@ -18,6 +18,11 @@ const Routing: Routes = [
       import('./order/order.module').then((m) => m.OrderModule)
   },
   {
+    path: 'payment',
+    loadChildren: () =>
+      import('./payment/payment.module').then((m) => m.PaymentModule)
+  },
+  {
     path: 'autoprofile',
     loadChildren: () =>
       import('./autoprofile/autoprofile.module').then(
