@@ -94,14 +94,14 @@ export class PaymentController implements OnInit {
   }
 
   paymentSuccessHandler(response) {
-    this.toastr.info(
-      `Payment is successful, Txn id: ${response.razorpay_payment_id}`
-    );
+    // this.toastr.info(
+    //   `Payment is successful, Txn id: ${response.razorpay_payment_id}`
+    // );
     this.payment.savePaymentResponse(response, true).subscribe((saved) => {
-      console.log('Details saved in db...');
-      this.toastr.success(
-        'Txn details captured, Credits will be added in sometime.'
-      );
+      console.log('Details saved in db...', saved);
+      // this.toastr.success(
+      //   'Txn details captured, Credits will be added in sometime.'
+      // );
     });
     // .subscribe((saved) => {
 
@@ -115,7 +115,6 @@ export class PaymentController implements OnInit {
   }
 
   doPayment() {
-    console.log('taking sometime');
     console.log('payment options --', this.paymentOptions1);
     var rzp = new Razorpay(this.paymentOptions1);
     rzp.open();

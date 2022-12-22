@@ -81,34 +81,36 @@
     <div class="mb-0" *ngIf="services.length <= 0">
       No services found for selected category.
     </div>
-    <div class="mb-0" *ngIf="services.length > 0">
-      <label class="d-flex flex-stack mb-5 cursor-pointer" *ngFor="let service of services" (change)="onServiceChange($event)">
-        <span class="d-flex align-items-center me-2">
-          <span class="symbol symbol-50px me-6">
-            <span class="symbol-label" >
-              <span
-                class={{service.service_icon}}
-                [style.color]="'#d2d5de !important'"
-              ></span>
+    <div class="scroll-y mh-300px me-n7 pe-7">
+      <div class="mb-0" *ngIf="services.length > 0">
+        <label class="d-flex flex-stack mb-5 cursor-pointer" *ngFor="let service of services" (change)="onServiceChange($event)">
+          <span class="d-flex align-items-center me-2">
+            <span class="symbol symbol-50px me-6">
+              <span class="symbol-label" >
+                <span
+                  class={{service.service_icon}}
+                  [style.color]="'#d2d5de !important'"
+                ></span>
+              </span>
+            </span>
+            <span class="d-flex flex-column">
+              <span class="fw-bolder text-gray-800 text-hover-primary fs-5">{{service.service_name + ' - $' + service.price_per_k + '/k'}}</span>
+              <span class="fs-6 fw-bold text-gray-400">
+                Min: {{service.min_quantity}} | Max: {{service.max_quantity}} | {{service.service_details}}
+              </span>
             </span>
           </span>
-          <span class="d-flex flex-column">
-            <span class="fw-bolder text-gray-800 text-hover-primary fs-5">{{service.service_name + ' - $' + service.price_per_k + '/k'}}</span>
-            <span class="fs-6 fw-bold text-gray-400">
-              Min: {{service.min_quantity}} | Max: {{service.max_quantity}} | {{service.service_details}}
-            </span>
+          <span class="form-check form-check-custom form-check-solid">
+            <input
+              formControlName="selectService"
+              class="form-check-input"
+              type="radio"
+              [attr.data-min-quantity]="service.min_quantity"
+              [attr.data-max-quantity]="service.max_quantity"
+              value={{service._id}} />
           </span>
-        </span>
-        <span class="form-check form-check-custom form-check-solid">
-          <input
-            formControlName="selectService"
-            class="form-check-input"
-            type="radio"
-            [attr.data-min-quantity]="service.min_quantity"
-            [attr.data-max-quantity]="service.max_quantity"
-            value={{service._id}} />
-        </span>
-      </label>
+        </label>
+      </div>
     </div>
   </div>
 
