@@ -9,7 +9,7 @@ export const environment = {
   isMockEnabled: true,
   authTokenName: 'x-auth-token',
   apiUrl: 'http://localhost:3000/api/v1',
-  appThemeName: 'SocialBond',
+  appThemeName: 'SOCIOBOND',
   rzpKey: 'rzp_test_lgPQ7s6NgoRiW5'
 };
 
