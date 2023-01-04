@@ -28,7 +28,7 @@ export class PaymentOptionsModel {
     this.key = environment.rzpKey;
     this.amount = options.amount;
     this.currency = options.currency;
-    this.name = options.name || 'SOCIALBOND';
+    this.name = options.name || 'SOCIOBOND';
     this.description = options.description || '';
     this.image =
       options.image || './assets/media/logos/SB_icon_transparent.png';
