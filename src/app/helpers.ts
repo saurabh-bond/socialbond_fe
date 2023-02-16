@@ -1,10 +1,6 @@
 export class Helpers {
   static getRelativeTime(dateTime) {
-    if (isNaN(Date.parse(dateTime))) {
-      return '-'; // Not a valid date time string
-    }
-    dateTime = new Date(dateTime);
-    var dateTimeInMiliSeconds = dateTime.getTime();
+    var dateTimeInMiliSeconds = dateTime * 1000;
     var currentTimeInMiliSeconds = new Date().getTime();
 
     var msPerMinute = 60 * 1000;
