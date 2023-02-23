@@ -129,7 +129,7 @@ export class AuthService implements OnInit, OnDestroy {
     );
   }
 
-  forgotPassword(email: string): Observable<boolean> {
+  forgotPassword(email: string): Observable<APIResponse> {
     this.isLoadingSubject.next(true);
     return this.authHttpService
       .forgotPassword(email)
