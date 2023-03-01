@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  of,
+  throwError
+} from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { IAddOrder, inits } from './add-order.helper';
 import { Buffer } from 'buffer';
 import { AuthService, UserType } from 'src/app/modules/auth';
 import { OrderService } from '../order.service';
 import { ToastrService } from 'ngx-toastr';
+import { APIResponse } from 'src/app/modules/auth/models/api-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-order',
@@ -77,13 +86,31 @@ export class AddOrderComponent implements OnInit {
   }
 
   submitForm() {
-    this.orderService.addOrder(this.order$.value).subscribe((responseData) => {
-      if (responseData.statusCode === 201) {
-        this.toastr.success(responseData.message);
-      } else {
-        this.toastr.error(responseData.message);
-      }
-    });
+    this.orderService
+      .addOrder(this.order$.value)
+      .pipe(
+        catchError((err) => {
+          if (err.status && err.error.message) {
+            this.toastr.error(err.error.message);
+            return throwError(err.error.message);
+          }
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 0) {
+              return throwError(
+                'Unable to Connect to the Server. Please try after sometime.'
+              );
+            }
+          }
+          return of(undefined);
+        })
+      )
+      .subscribe((responseData: APIResponse) => {
+        if (responseData.statusCode === 201) {
+          this.toastr.success(responseData.message);
+        } else {
+          this.toastr.error(responseData.message);
+        }
+      });
   }
 
   ngOnDestroy() {
