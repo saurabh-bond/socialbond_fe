@@ -1,9 +1,9 @@
 <div class="pb-10 pb-lg-15">
-  <h2 class="fw-bolder text-dark">Account Info</h2>
-  <div class="text-gray-400 fw-bold fs-6">
+  <h2 class="fw-bolder text-dark">Order Settings</h2>
+  <!-- <div class="text-gray-400 fw-bold fs-6">
     If you need more info, please check out
     <a href="#" class="link-primary fw-bolder"> Help Page</a>.
-  </div>
+  </div> -->
 </div>
 <div [formGroup]="form">
   <div class="mb-10 fv-row">
@@ -75,7 +75,7 @@
     <label class="d-flex align-items-center form-label mb-5"
       >Select Service<i
         class="fas fa-exclamation-circle ms-2 fs-7"
-        ngbTooltip="Please choose service, for more details check 'Price and Information' page."
+        ngbTooltip="Please choose service, for more details check 'Price Information' page."
       ></i
     ></label>
     <div class="mb-0" *ngIf="services.length <= 0">
