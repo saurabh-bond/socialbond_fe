@@ -68,6 +68,18 @@ export class AuthService implements OnInit, OnDestroy {
       }),
       switchMap(() => this.getUserByToken()),
       catchError((err) => {
+        console.log('eRRORR ', err);
+        if (err.status && err.error.message) {
+          this.errorMsg = err.error.message;
+          return throwError(this.errorMsg);
+        }
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 0) {
+            return throwError(
+              'Unable to Connect to the Server. Please try after sometime.'
+            );
+          }
+        }
         return of(undefined);
       }),
       finalize(() => this.isLoadingSubject.next(false))

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Subscription, Observable, of } from 'rxjs';
+import { first, catchError } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -76,7 +78,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
-      .pipe(first())
+      .pipe(
+        first(),
+        catchError((error) => {
+          this.toastr.error(error);
+          return of(undefined);
+        })
+      )
       .subscribe((user: UserModel | undefined) => {
         if (user) {
           this.router.navigate([this.returnUrl]);
