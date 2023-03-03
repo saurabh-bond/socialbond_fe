@@ -37,26 +37,30 @@ const availableStaticValues = {
     icon: 'fa fa-heart fa-2x',
     categoryName: 'Likes',
     quantityPlaceholder: 'Enter quantity of Likes that you want on the post.',
-    exampleUrl: ''
+    exampleUrl: '',
+    urlType: 'post'
   },
   ig_followers: {
     icon: 'fa fa-users fa-2x',
     categoryName: 'Followers',
     quantityPlaceholder: 'Enter quantity of Followers, want on profile.',
-    exampleUrl: ''
+    exampleUrl: '',
+    urlType: 'profile'
   },
   ig_views: {
     icon: 'fa fa-grin-hearts fa-2x',
     categoryName: 'Views',
     quantityPlaceholder: 'Enter quantity of Views that you want on the post.',
-    exampleUrl: ''
+    exampleUrl: '',
+    urlType: 'post'
   },
   ig_comments: {
     icon: 'fa fa-comment-alt fa-2x',
     categoryName: 'Comments',
     quantityPlaceholder:
       'Enter quantity of Comments that you want on the post.',
-    exampleUrl: ''
+    exampleUrl: '',
+    urlType: 'post'
   }
 };
 

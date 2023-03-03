@@ -6,8 +6,9 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { of, Subscription, throwError } from 'rxjs';
+import { catchError, first, map } from 'rxjs/operators';
 import { OrderService } from '../../../order.service';
 import { IAddOrder, availableStaticValues } from '../../add-order.helper';
 
@@ -33,7 +34,11 @@ export class Step2Component implements OnInit {
 
   private unsubscribe: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private orderService: OrderService) {}
+  constructor(
+    private fb: FormBuilder,
+    private orderService: OrderService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     let filters = {
@@ -130,8 +135,20 @@ export class Step2Component implements OnInit {
   onLinkChange(event: any) {
     console.log(event.target.value);
     let postUrl = event.target.value;
+    if (postUrl.trim() === '') {
+      return;
+    }
+    let urlType =
+      availableStaticValues[this.defaultValues.selectCategory].urlType;
     this.orderService
-      .fetchIgPostDetails(postUrl)
+      .fetchIgPostDetails(postUrl, urlType)
+      .pipe(
+        first(),
+        catchError((err) => {
+          this.toastr.error(err);
+          return throwError(err);
+        })
+      )
       .subscribe((postDetailsResponse) => {
         console.log('Inside step2 component --->', postDetailsResponse);
         if (postDetailsResponse.statusCode === 200) {
