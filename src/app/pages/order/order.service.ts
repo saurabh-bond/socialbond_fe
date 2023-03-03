@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams
+} from '@angular/common/http';
 import { IApiResponse } from 'src/app/modules/interfaces/api-response';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { IAddOrder } from './add-order/add-order.helper';
 import { environment } from '../../../environments/environment';
 import { IOrderCount } from 'src/app/modules/interfaces/orderCount';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 const API_URL = environment.apiUrl;
 
@@ -43,10 +47,30 @@ export class OrderService {
     });
   }
 
-  fetchIgPostDetails(postUrl: string): Observable<IApiResponse> {
-    return this.http.post<IApiResponse>(`${API_URL}/fetchIgPostDetails`, {
-      postUrl: postUrl
-    });
+  fetchIgPostDetails(
+    postUrl: string,
+    urlType: string
+  ): Observable<IApiResponse> {
+    return this.http
+      .post<IApiResponse>(`${API_URL}/fetchIgPostDetails`, {
+        postUrl: postUrl,
+        urlType: urlType
+      })
+      .pipe(
+        catchError((err) => {
+          if (err.status && err.error.message) {
+            return throwError(err.error.message);
+          }
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 0) {
+              return throwError(
+                'Unable to Connect to the Server. Please try after sometime.'
+              );
+            }
+          }
+          return of(undefined);
+        })
+      );
   }
 
   addOrder(orderRequestData: IAddOrder) {

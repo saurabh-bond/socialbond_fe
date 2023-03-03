@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
       .subscribe((user: UserModel | undefined) => {
         if (user) {
+          this.toastr.success("Welcome to Sociobond");
           this.router.navigate([this.returnUrl]);
         } else {
           this.hasError = true;

@@ -37,7 +37,12 @@ export class OrderHistoryComponent {
     },
     { field: 'quantity' },
     { field: 'price' },
-    { field: 'statusText', minWidth: 160, cellRenderer: StatusValueRenderer },
+    {
+      headerName: 'Status',
+      field: 'statusText',
+      minWidth: 160,
+      cellRenderer: StatusValueRenderer
+    },
     {
       headerName: 'Added',
       field: 'created_at',
