@@ -7,6 +7,7 @@ import { CreatedAtValueRenderer } from './cell-renderer/created-at-value-rendere
 import { LinkValueRenderer } from './cell-renderer/link-value-renderer.component';
 import { StatusValueRenderer } from './cell-renderer/status-value-renderer.component';
 import { UpdatedAtValueRenderer } from './cell-renderer/updated-at-value-renderer.component';
+import { ActionButtonRenderer } from './cell-renderer/action-button-renderer.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,15 +20,15 @@ export class OrderHistoryComponent {
   public rowSelection: 'single' | 'multiple' = 'multiple';
 
   public columnDefs: ColDef[] = [
-    {
-      field: '',
-      maxWidth: 40,
-      filter: false,
-      sortable: false,
-      headerCheckboxSelection: true,
-      headerCheckboxSelectionFilteredOnly: true,
-      checkboxSelection: true
-    },
+    // {
+    //   field: '',
+    //   maxWidth: 40,
+    //   filter: false,
+    //   sortable: false,
+    //   headerCheckboxSelection: true,
+    //   headerCheckboxSelectionFilteredOnly: true,
+    //   checkboxSelection: true
+    // },
     { headerName: 'Order ID', field: '_id', maxWidth: 240 },
     {
       field: 'link',
@@ -84,6 +85,22 @@ export class OrderHistoryComponent {
       field: 'updated_at',
       cellRenderer: UpdatedAtValueRenderer,
       filter: false
+    },
+    {
+      headerName: 'Action',
+      filter: false,
+      minWidth: 120,
+      maxWidth: 160,
+      sortable: false,
+      pinned: 'right',
+      lockPinned: true,
+      cellRenderer: ActionButtonRenderer,
+      cellRendererParams: {
+        clicked: (field: any) => {
+          alert(`${field} was clicked`);
+        }
+      },
+      cellStyle: { 'background-color': 'lightyellow' }
     }
   ];
   public defaultColDef: ColDef = {
@@ -95,6 +112,13 @@ export class OrderHistoryComponent {
   };
 
   public rowData!: any[];
+
+  // set background colour on even rows again, this looks bad, should be using CSS classes
+  public getRowStyle = (params) => {
+    if (params.data.status === -1) {
+      return { background: 'lightcoral' };
+    }
+  };
 
   constructor(private http: HttpClient) {}
 

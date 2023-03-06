@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { IService } from 'src/app/modules/interfaces/service';
 import { IAddOrder } from '../../add-order.helper';
 
 @Component({
@@ -31,13 +32,12 @@ export class Step4Component implements OnInit {
     if (this.postDetails !== undefined) {
       this.postDetailsFetched.emit(this.postDetails);
     }
-    console.log('Step 4 Form value ----->', this.defaultValues);
+    let serviceDetailsDefaultValues = this.defaultValues
+      .serviceDetails as Array<IService>;
+    let serviceDetails: IService = serviceDetailsDefaultValues.find(
+      (s: any) => s._id === this.defaultValues.selectService
+    );
 
-    let serviceDetails =
-      this.defaultValues.serviceDetails &&
-      Array.isArray(this.defaultValues.serviceDetails)
-        ? this.defaultValues.serviceDetails[0]
-        : {};
     this.orderCost =
       Math.round(
         (serviceDetails.price_per_k / 1000) * this.defaultValues.quantity * 1000
