@@ -8,7 +8,8 @@ export const environment = {
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
   authTokenName: 'x-auth-token',
-  apiUrl: 'https://sociobond.com/api/api/v1',
+  apiUrl: 'https://sociobond.com/landing/api/v1',
+  landingUrl: 'https://sociobond.com/landing',
   appThemeName: 'SOCIOBOND',
   rzpKey: 'rzp_test_lgPQ7s6NgoRiW5'
 };

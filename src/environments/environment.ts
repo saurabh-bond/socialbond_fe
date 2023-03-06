@@ -9,6 +9,7 @@ export const environment = {
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
   apiUrl: 'http://localhost:3000/api/v1',
+  landingUrl: 'http://localhost:3000',
   appThemeName: 'SOCIOBOND',
   rzpKey: 'rzp_test_lgPQ7s6NgoRiW5'
 };
