@@ -88,9 +88,10 @@ export class AuthService implements OnInit, OnDestroy {
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {
-      queryParams: {}
-    });
+    // this.router.navigate(['http://localhost:3000/'], {
+    //   queryParams: {}
+    // });
+    window.location.href = `${environment.landingUrl}`;
   }
 
   getUserByToken(): Observable<UserType> {
