@@ -79,20 +79,21 @@
       <div class="position-relative">
         <input
           formControlName="run"
-          type="text"
+          type="number"
           class="form-control form-control-solid"
-          minlength="1"
-          maxlength="20"
+          min="1"
+          max="20"
           placeholder="Number of Runs"
         />
         <div
           class="fv-plugins-message-container invalid-feedback"
           *ngIf="
-            form.get('run')?.hasError('required') &&
+            form.get('run')?.errors &&
             form.get('run')?.touched
           "
         >
-          Number of run is required
+          <span *ngIf="form.get('run')?.hasError('required')">Number of run is required. </span>
+          <span *ngIf="form.get('run')?.hasError('min') || form.get('run')?.hasError('max')">{{'Number of run should be in between ' + minRun + ' and ' + maxRun}}. </span>
         </div>
         <div class="position-absolute translate-middle-y top-50 end-0 me-3">
           <span class="fas fa-running"></span>
@@ -125,8 +126,7 @@
       <div
         class="fv-plugins-message-container invalid-feedback"
         *ngIf="
-          form.get('interval')?.hasError('required') &&
-          form.get('interval')?.touched
+          form.get('interval')?.hasError('required')
         "
       >
         Interval value is required

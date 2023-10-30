@@ -11,7 +11,8 @@ export const environment = {
   apiUrl: 'http://localhost:3000/api/v1',
   landingUrl: 'http://localhost:3000',
   appThemeName: 'SOCIOBOND',
-  rzpKey: 'rzp_test_lgPQ7s6NgoRiW5'
+  rzpKey: 'rzp_test_lgPQ7s6NgoRiW5',
+  supportUrl: 'http://localhost:4200/support'
 };
 
 /*

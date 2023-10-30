@@ -9,6 +9,11 @@ import { StatusValueRenderer } from './cell-renderer/status-value-renderer.compo
 import { UpdatedAtValueRenderer } from './cell-renderer/updated-at-value-renderer.component';
 import { ActionButtonRenderer } from './cell-renderer/action-button-renderer.component';
 import { environment } from 'src/environments/environment';
+import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+import { MoodRenderer } from './cell-renderer/mood-renderer.component';
+import { MoodEditor } from './cell-renderer/mood-editor.component';
+import './style.css';
 
 @Component({
   selector: 'app-order-history',
@@ -36,6 +41,7 @@ export class OrderHistoryComponent {
       cellRenderer: LinkValueRenderer,
       sortable: false
     },
+    { headerName: 'Service', field: 'service_id.service_name', minWidth: 240 },
     { field: 'quantity' },
     { field: 'price' },
     {
@@ -87,16 +93,24 @@ export class OrderHistoryComponent {
       filter: false
     },
     {
+      field: 'Actions',
+      width: 100,
+      cellRenderer: MoodRenderer,
+      cellEditor: MoodEditor,
+      cellEditorPopup: true,
+      editable: true
+    },
+    {
       headerName: 'Action',
       filter: false,
-      minWidth: 120,
-      maxWidth: 160,
       sortable: false,
       pinned: 'right',
       lockPinned: true,
       cellRenderer: ActionButtonRenderer,
       cellRendererParams: {
         clicked: (field: any) => {
+          console.log('details btn clicked', field);
+          Swal.fire('Good job!', 'You clicked the button!', 'success');
           alert(`${field} was clicked`);
         }
       },
@@ -135,6 +149,7 @@ export class OrderHistoryComponent {
         // data.data.forEach(function (item: any) {
         //   item.id = idSequence++;
         // });
+        console.log(data.data);
         this.gridApi!.setRowData(data.data);
       });
   }

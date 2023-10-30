@@ -1,3 +1,57 @@
 .card_ig {
   box-shadow: 1px 1px 1px 2px rgb(76 87 125 / 20%) !important;
 }
+
+/* CSS for step4 - Review order -- STARTS */
+.table thead th,
+.table thead td {
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom-width: 1px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ebedf3;
+}
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #ebedf3;
+}
+.text-muted {
+  color: #b5b5c3 !important;
+}
+.font-weight-bold {
+  font-weight: 500 !important;
+}
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+.font-weight-boldest {
+  font-weight: 700;
+}
+.pt-7,
+.py-7 {
+  padding-top: 1.75rem !important;
+}
+.pl-0,
+.px-0 {
+  padding-left: 0 !important;
+}
+.border-0 {
+  border: 0 !important;
+}
+.font-weight-bolder {
+  font-weight: 600 !important;
+}
+.pr-0,
+.px-0 {
+  padding-right: 0 !important;
+}
+.font-size-h5 {
+  font-size: 1.25rem !important;
+}
+/* CSS for step4 - Review order -- ENDS */

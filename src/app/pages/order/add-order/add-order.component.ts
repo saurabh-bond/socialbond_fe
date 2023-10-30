@@ -35,6 +35,10 @@ export class AddOrderComponent implements OnInit {
   postDetails$: BehaviorSubject<[]> = new BehaviorSubject<any>([]);
 
   user$: Observable<UserType>;
+  orderSubmitted$: BehaviorSubject<any> = new BehaviorSubject<any>({
+    message: '',
+    orderId: ''
+  });
 
   constructor(
     private auth: AuthService,
@@ -104,8 +108,13 @@ export class AddOrderComponent implements OnInit {
           return of(undefined);
         })
       )
-      .subscribe((responseData: APIResponse) => {
+      .subscribe((responseData) => {
         if (responseData.statusCode === 201) {
+          console.log('order submitted api response ', responseData.data);
+          this.orderSubmitted$.next({
+            message: responseData.message,
+            orderId: responseData.data.order_id
+          });
           this.toastr.success(responseData.message);
         } else {
           this.toastr.error(responseData.message);

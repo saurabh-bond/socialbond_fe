@@ -11,7 +11,8 @@ export const environment = {
   apiUrl: 'https://sociobond.com/landing/api/v1',
   landingUrl: 'https://sociobond.com/landing',
   appThemeName: 'SOCIOBOND',
-  rzpKey: 'rzp_test_lgPQ7s6NgoRiW5'
+  rzpKey: 'rzp_test_lgPQ7s6NgoRiW5',
+  supportUrl: 'https://sociobond.com/support'
 };
 
 /*

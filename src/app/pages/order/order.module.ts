@@ -5,6 +5,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { CardsModule } from 'src/app/_metronic/partials';
+import { WidgetsModule } from 'src/app/_metronic/partials';
 import { DataTablesModule } from 'angular-datatables';
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -35,9 +36,16 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     NgbTooltipModule,
     RouterModule.forChild([
       { path: 'add', component: AddOrderComponent },
-      { path: 'history', component: OrderHistoryComponent }
+      {
+        path: 'history',
+        loadChildren: () =>
+          import('./order-history/order-history.module').then(
+            (m) => m.OrderHistoryModule
+          )
+      }
     ]),
     CardsModule,
+    WidgetsModule,
     DataTablesModule,
     AgGridModule.withComponents([])
   ]

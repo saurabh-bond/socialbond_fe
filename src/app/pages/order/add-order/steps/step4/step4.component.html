@@ -1,13 +1,13 @@
 <div class="pb-10 pb-lg-15">
-  <h2 class="fw-bolder text-dark">Order Checkout</h2>
-  <div class="text-gray-400 fw-bold fs-6">
+  <h2 class="fw-bolder text-dark">Review your Order and Submit</h2>
+  <!-- <div class="text-gray-400 fw-bold fs-6">
     If you need more info, please check out
     <a href="#" class="text-primary fw-bolder">Help Page</a>.
-  </div>
+  </div> -->
 </div>
 <div [formGroup]="form">
 
-  <div class="card mb-5 mb-xl-10 card_ig">
+  <!-- <div class="card mb-5 mb-xl-10 card_ig">
     <div
       class="card-header border-0 cursor-pointer"
       role="button"
@@ -89,5 +89,137 @@
         </div>
       </div>
     </div>
+  </div> -->
+
+
+<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
+  <!--begin::Section-->
+  <!-- <h4 class="mb-10 font-weight-bold text-dark">Review your Order and Submit</h4> -->
+  <h6 class="font-weight-bolder mb-3">
+      Order Link:
+  </h6>
+  <div class="text-dark-50 line-height-lg">
+      <a href="{{ defaultValues.link }}" target="_blank">{{ defaultValues.link }}</a>
   </div>
+  <div class="separator separator-dashed my-5"></div>
+  <!--end::Section-->
+
+  <!--begin::Section-->
+  <h6 class="font-weight-bolder mb-3">
+      Order Details:
+  </h6>
+  <div class="text-dark-50 line-height-lg">
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th class="pl-0 font-weight-bold text-muted  text-uppercase">Ordered Items</th>
+                      <th class="text-right font-weight-bold text-muted text-uppercase">Qty</th>
+                      <th class="text-right font-weight-bold text-muted text-uppercase">Unit Price (Per K)</th>
+                      <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="font-weight-boldest">
+                      <td class="border-0 pl-0 pt-7 d-flex align-items-center">
+                          <!--begin::Symbol-->
+                          <div class="symbol symbol-40 flex-shrink-0 mr-4 bg-light">
+                              <div class="symbol-label" style="background-image: url('{{igPostImg}}')"></div>
+                          </div>
+                          <!--end::Symbol-->
+                          <div style="padding-left: 10px;"> {{ orderDetails.service }} </div>
+                      </td>
+                      <td class="text-right pt-7 align-middle">{{ orderDetails.quantity }}</td>
+                      <td class="text-right pt-7 align-middle">{{ orderDetails.price_per_k }}</td>
+                      <td class="text-primary pr-0 pt-7 text-right align-middle">{{ orderDetails.order_price }}</td>
+                  </tr>
+                  <tr>
+                      <td colspan="2"></td>
+                      <td class="font-weight-bolder text-right">Subtotal</td>
+                      <td class="font-weight-bolder text-right pr-0">{{ orderDetails.subtotal }}</td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" class="border-0 pt-0"></td>
+                      <td class="border-0 pt-0 font-weight-bolder text-right">Service Fees</td>
+                      <td class="border-0 pt-0 font-weight-bolder text-right pr-0">{{ orderDetails.service_fees }}</td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" class="border-0 pt-0"></td>
+                      <td class="border-0 pt-0 font-weight-bolder font-size-h5 text-right">Grand Total</td>
+                      <td class="border-0 pt-0 font-weight-bolder font-size-h5 text-success text-right pr-0">{{ orderDetails.grandTotal }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  <div class="separator separator-dashed my-5"></div>
+  <!--end::Section-->
+
+  <!--begin::Section-->
+  <h6 class="font-weight-bolder mb-3">
+      Delivery Service Type:
+  </h6>
+  <div class="text-dark-50 line-height-lg">
+      <div>Scheduled Date - <b>{{ orderDetails.scheduleOrdersMsg }}</b></div>
+      <div>Run & Interval - <b>{{ orderDetails.splitOrdersMsg }}</b></div>
+  </div>
+  <!--end::Section-->
+</div>
+
+<div
+          class="notice d-flex bg-light-primary rounded border-primary
+            border border-dashed p-6"
+          *ngIf="this.defaultValues.user_credits >= orderCost"
+        >
+          <span
+            class="svg-icon svg-icon-2tx svg-icon-primary me-4"
+            [inlineSVG]="'./assets/media/icons/duotune/general/gen048.svg'"
+          >
+          </span>
+          <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+            <div class="mb-3 mb-md-0 fw-bold">
+              <h4 class="text-gray-800 fw-bolder">Pay Through Credits</h4>
+              <div class="fs-6 text-gray-600 pe-7">
+                Order cost will be deducted from your credits wallet.
+              </div>
+            </div>
+            <a class="btn btn-sm btn-active-light fw-bolder">
+              Current Balance:
+              ${{ this.defaultValues.user_credits }}
+            </a>
+            <span
+              class="svg-icon svg-icon-2tx svg-icon-primary me-4"
+              [inlineSVG]="'./assets/media/icons/duotune/general/gen026.svg'"
+            ></span>
+          </div>
+        </div>
+
+        <div
+          class="notice d-flex bg-light-danger rounded border-danger
+            border border-dashed p-6"
+          *ngIf="this.defaultValues.user_credits < orderCost"
+        >
+          <span
+            class="svg-icon svg-icon-2tx svg-icon-danger me-4"
+            [inlineSVG]="'./assets/media/icons/duotune/general/gen050.svg'"
+          >
+          </span>
+          <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+            <div class="mb-3 mb-md-0 fw-bold">
+              <h4 class="text-gray-800 fw-bolder">Pay Through Credits</h4>
+              <div class="fs-6 text-gray-600 pe-7">
+                Order cost is greater than the credits balance.
+                Please add credits to your wallet.
+                <div class="text-gray-400 fw-bold fs-6"> (Clicking on submit, will save the order as Draft Order.
+                  You can access and place orders from <a class="link-primary fw-bolder"> Draft Order </a> menu.
+                </div>
+              </div>
+            </div>
+            <a class="btn btn-sm btn-light btn-active-primary fw-bolder">
+              Add Credits
+              <i class="fas fa-plus-circle"></i>
+            </a>
+          </div>
+        </div>
+
 </div>

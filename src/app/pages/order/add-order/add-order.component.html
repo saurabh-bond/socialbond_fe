@@ -97,7 +97,7 @@
 
           <div class="stepper-label">
             <h3 class="stepper-title">Order Details</h3>
-            <div class="stepper-desc fw-bold">Your order info</div>
+            <div class="stepper-desc fw-bold">Review your order</div>
           </div>
         </div>
 
@@ -114,7 +114,7 @@
 
           <div class="stepper-label">
             <h3 class="stepper-title">Completed</h3>
-            <div class="stepper-desc fw-bold">Woah, your order placed</div>
+            <div class="stepper-desc fw-bold">Order Status</div>
           </div>
         </div>
       </div>
@@ -176,7 +176,10 @@
         </ng-container>
 
         <ng-container *ngIf="currentStep$.value === 5">
-          <app-step5 class="w-100"></app-step5>
+          <app-step5
+            class="w-100"
+            [orderSubmitted]="orderSubmitted$ | async"
+          ></app-step5>
         </ng-container>
       </div>
 
@@ -217,6 +220,27 @@
                 </ng-container>
                 <ng-container *ngIf="currentStep$.value === formsCount - 1">
                   Submit
+                </ng-container>
+              </span>
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="currentStep$.value === formsCount">
+          <div>
+            <button
+              type="button"
+              class="btn btn-lg btn-primary me-3"
+              routerLink="/order/history"
+            >
+              <span class="indicator-label">
+                <ng-container>
+                  View Order History
+                  <span
+                    [inlineSVG]="
+                      './assets/media/icons/duotune/general/gen005.svg'
+                    "
+                    class="svg-icon svg-icon-3 ms-2 me-0"
+                  ></span>
                 </ng-container>
               </span>
             </button>

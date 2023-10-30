@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { of, Subscription, throwError } from 'rxjs';
-import { catchError, first, map } from 'rxjs/operators';
+import { catchError, first, map, take } from 'rxjs/operators';
 import { OrderService } from '../../../order.service';
 import { IAddOrder, availableStaticValues } from '../../add-order.helper';
 
@@ -76,6 +76,8 @@ export class Step2Component implements OnInit {
         // Clearing selected service to empty before fetching new service list
         val.selectService = '';
         this.defaultValues.selectService = '';
+        this.defaultValues.selectType = val.selectType;
+        this.form.controls['selectService'].reset();
         this.getServices(filters);
       }
       console.log('Updating values --->', val);
@@ -150,7 +152,6 @@ export class Step2Component implements OnInit {
         })
       )
       .subscribe((postDetailsResponse) => {
-        console.log('Inside step2 component --->', postDetailsResponse);
         if (postDetailsResponse.statusCode === 200) {
           console.log('Inside step2 component --->', postDetailsResponse.data);
           this.postDetails = postDetailsResponse.data;

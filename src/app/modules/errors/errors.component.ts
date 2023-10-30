@@ -6,16 +6,22 @@ import {
   ScrollComponent,
   ScrollTopComponent,
   StickyComponent,
-  ToggleComponent,
+  ToggleComponent
 } from '../../_metronic/kt/components';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-errors',
   templateUrl: './errors.component.html',
-  styleUrls: ['./errors.component.scss'],
+  styleUrls: ['./errors.component.scss']
 })
 export class ErrorsComponent implements OnInit {
   @HostBinding('class') class = 'd-flex flex-column flex-root';
+
+  termsConditions = environment.supportUrl + '/terms';
+  contactUs = environment.supportUrl + '/contact-us';
+  privacyPolicy = environment.supportUrl + '/pivacy-policy';
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {}

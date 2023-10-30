@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { IAddOrder } from '../../add-order.helper';
+import { IService } from 'src/app/modules/interfaces/service';
 import flatpickr from 'flatpickr';
 
 @Component({
@@ -26,6 +27,9 @@ export class Step3Component implements OnInit {
     minDate: 'today',
     maxDate: new Date(Date.now() + this.ONE_DAY_MSECONDS * 30) // 30 days from now
   };
+  serviceDetails: IService;
+  minRun: number = 0;
+  maxRun: number = 20;
 
   private unsubscribe: Subscription[] = [];
 
@@ -37,6 +41,12 @@ export class Step3Component implements OnInit {
 
     this.scheduledDateConfig.defaultDate = [this.defaultValues.scheduleOrders];
     flatpickr('#scheduleOrders', this.scheduledDateConfig);
+
+    let serviceDetailsDefaultValues = this.defaultValues
+      .serviceDetails as Array<IService>;
+    this.serviceDetails = serviceDetailsDefaultValues.find(
+      (s: any) => s._id === this.defaultValues.selectService
+    );
   }
 
   initForm() {
@@ -71,6 +81,32 @@ export class Step3Component implements OnInit {
       } else {
         this.form.controls['scheduleOrders'].clearValidators();
         this.form.controls['scheduleOrders'].updateValueAndValidity();
+      }
+    });
+
+    this.form.controls.splitOrdersSet.valueChanges.subscribe((val) => {
+      if (val) {
+        let possibleMaxRun = Math.floor(
+          this.defaultValues.quantity / this.serviceDetails.min_quantity
+        );
+        this.maxRun =
+          possibleMaxRun < this.maxRun ? possibleMaxRun : this.maxRun;
+        this.form.controls['run'].clearValidators();
+        this.form.controls['run'].setValidators([
+          Validators.required,
+          Validators.min(this.minRun),
+          Validators.max(this.maxRun)
+        ]);
+        this.form.controls['run'].updateValueAndValidity();
+
+        this.form.controls['interval'].clearValidators();
+        this.form.controls['interval'].setValidators([Validators.required]);
+        this.form.controls['interval'].updateValueAndValidity();
+      } else {
+        this.form.controls['run'].clearValidators();
+        this.form.controls['run'].updateValueAndValidity();
+        this.form.controls['interval'].clearValidators();
+        this.form.controls['interval'].updateValueAndValidity();
       }
     });
   }

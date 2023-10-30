@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Helpers } from 'src/app/helpers';
 import { IService } from 'src/app/modules/interfaces/service';
 import { IAddOrder } from '../../add-order.helper';
 
@@ -19,8 +20,9 @@ export class Step4Component implements OnInit {
   @Input() postDetails: Partial<any>;
   @Output() postDetailsFetched = new EventEmitter();
 
-  orderDetails = {};
+  orderDetails: any = {};
   orderCost = 0;
+  igPostImg = '';
 
   private unsubscribe: Subscription[] = [];
 
@@ -31,6 +33,7 @@ export class Step4Component implements OnInit {
     this.updateParentModel({}, this.checkForm());
     if (this.postDetails !== undefined) {
       this.postDetailsFetched.emit(this.postDetails);
+      this.igPostImg = Helpers.processIgURL(this.postDetails.post_img_url);
     }
     let serviceDetailsDefaultValues = this.defaultValues
       .serviceDetails as Array<IService>;
@@ -44,14 +47,41 @@ export class Step4Component implements OnInit {
       ) / 1000;
 
     if (serviceDetails) {
+      let price_per_k = serviceDetails.price_per_k;
+      let quantity = this.defaultValues.quantity;
+      let order_price = Helpers.calculateOrderPrice(price_per_k, quantity);
+      let service_fees = 0;
+      let scheduleOrdersMsg = this.defaultValues.scheduleOrdersSet
+        ? `Set (Order will be process after ${this.defaultValues.scheduleOrders})`
+        : `Not set (Order will be process ASAP)`;
+      let splitOrdersMsg =
+        this.defaultValues.splitOrdersSet &&
+        this.defaultValues.splitOrders.run > 0
+          ? `Set (Order will be divided into ${
+              this.defaultValues.splitOrders.run
+            }
+        sub-orders of quantity (~ ${Math.floor(
+          quantity / this.defaultValues.splitOrders.run
+        )}) with set interval delay of
+        ${Helpers.convertSecsToRelativeTime(
+          this.defaultValues.splitOrders.interval
+        )})`
+          : 'Not set (Quantity will be delivered all together without delay) ';
+
       this.orderDetails = {
-        Service: serviceDetails.service_name,
-        Status: serviceDetails.service_details,
-        'Min. Quantity': serviceDetails.min_quantity,
-        'Max. Quantity': serviceDetails.max_quantity,
-        Quantity: this.defaultValues.quantity,
-        'Price Per 1K': '$' + serviceDetails.price_per_k,
-        'Current Balance': '$' + this.defaultValues.user_credits
+        service: serviceDetails.service_name,
+        status: serviceDetails.service_details,
+        service_min_quantity: serviceDetails.min_quantity,
+        service_max_quantity: serviceDetails.max_quantity,
+        quantity: quantity,
+        price_per_k: '$' + price_per_k,
+        order_price: '$' + order_price,
+        subtotal: '$' + order_price,
+        service_fees: '$' + service_fees,
+        grandTotal: '$' + (order_price + service_fees),
+        current_balance: '$' + this.defaultValues.user_credits,
+        scheduleOrdersMsg: scheduleOrdersMsg,
+        splitOrdersMsg: splitOrdersMsg
       };
     }
   }

@@ -1,0 +1,78 @@
+<div class="post d-flex flex-column-fluid" id="kt_post">
+  <!--begin::Container-->
+  <div id="kt_content_container" class="container-xxl">
+    <!--begin::Hero card-->
+    <div class="card mb-12">
+      <!--begin::Hero body-->
+      <div class="card-body flex-column p-5">
+        <!--begin::Hero content-->
+        <div class="d-flex align-items-center h-lg-300px p-5 p-lg-15">
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-column align-items-start justift-content-center flex-equal me-5">
+            <!--begin::Title-->
+            <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800 mb-5 mb-lg-10">How Can We Help You?</h1>
+            <!--end::Title-->
+            <!--begin::Input group-->
+            <div class="position-relative w-100">
+              <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+              <span
+                [inlineSVG]="'./assets/media/icons/duotune/general/gen046.svg'"
+                class="svg-icon svg-icon-2 svg-icon-primary position-absolute top-50 translate-middle ms-8"
+              ></span>
+              <!--end::Svg Icon-->
+              <input type="text" disabled class="form-control fs-4 py-4 ps-14 text-gray-700 placeholder-gray-400 mw-500px" name="email" value="" placeholder="support@sociobond.com" />
+            </div>
+            <!--end::Input group-->
+          </div>
+          <!--end::Wrapper-->
+          <!--begin::Wrapper-->
+          <div class="flex-equal d-flex justify-content-center align-items-end ms-5">
+            <!--begin::Illustration-->
+            <img src="assets/media/illustrations/sketchy-1/20.png" alt="" class="mw-100 mh-125px mh-lg-275px mb-lg-n12" />
+            <!--end::Illustration-->
+          </div>
+          <!--end::Wrapper-->
+        </div>
+        <!--end::Hero content-->
+        <!--begin::Hero nav-->
+        <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5">
+          <!--begin::Nav-->
+          <ul class="nav flex-wrap border-transparent fw-bolder">
+            <!--begin::Nav item-->
+            <li class="nav-item my-1">
+              <a class="btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase"
+                routerLink="/support/privacy-policy" routerLinkActive="active"
+              >Privacy Policy</a>
+            </li>
+            <!--end::Nav item-->
+            <!--begin::Nav item-->
+            <li class="nav-item my-1">
+              <a class="btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase"
+                routerLink="/support/contact-us" routerLinkActive="active"
+              >Contact Us</a>
+            </li>
+            <!--end::Nav item-->
+            <!--begin::Nav item-->
+            <li class="nav-item my-1">
+              <a class="btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase"
+               routerLink="/support/terms" routerLinkActive="active">Terms & Conditions</a>
+            </li>
+            <!--end::Nav item-->
+            <!--begin::Nav item-->
+            <li class="nav-item my-1">
+              <a class="btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase"
+               routerLink="/support/refund-policy" routerLinkActive="active">Cancellation & Refund Policy </a>
+            </li>
+            <!--end::Nav item-->
+          </ul>
+          <!--end::Nav-->
+        </div>
+        <!--end::Hero nav-->
+      </div>
+      <!--end::Hero body-->
+    </div>
+    <!--end::Hero card-->
+    <router-outlet></router-outlet>
+  </div>
+  <!--end::Container-->
+</div>

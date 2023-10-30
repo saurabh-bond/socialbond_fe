@@ -58,7 +58,7 @@ export class OrderService {
       })
       .pipe(
         catchError((err) => {
-          if (err.status && err.error.message) {
+          if (err.status !== 500 && err.error.message) {
             return throwError(err.error.message);
           }
           if (err instanceof HttpErrorResponse) {
@@ -91,7 +91,17 @@ export class OrderService {
     return this.http.post<IApiResponse>(`${API_URL}/placeOrder`, postData);
   }
 
+  /** Function to get the order cound based on status per user
+   * for showing on dashboard widget
+   * saving in orderCountSubject behavior
+   */
   getUserOrderCount() {
     return this.http.get<IApiResponse>(`${API_URL}/getUserOrderCount`);
+  }
+
+  getOrderDetails(order_id) {
+    return this.http.post<IApiResponse>(`${API_URL}/orderDetails`, {
+      order_id: order_id
+    });
   }
 }

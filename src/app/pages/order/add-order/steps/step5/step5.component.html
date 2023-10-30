@@ -1,15 +1,14 @@
 <div class="pb-8 pb-lg-10">
-  <h2 class="fw-bolder text-dark">Your Are Done!</h2>
-  <!-- <div class="text-gray-400 fw-bold fs-6">
-    If you need more info, please
-    <a class="link-primary fw-bolder cursor-pointer"> Sign In</a>.
-  </div> -->
+  <h2 class="fw-bolder text-dark">{{ orderMessage }}</h2>
+  <div class="text-gray-400 fw-bold fs-6">
+    <!-- Order Id: 123123 -->
+    <!-- <a class="link-primary fw-bolder cursor-pointer"> View Order History</a>. -->
+  </div>
 </div>
 <div class="mb-0">
   <div class="fs-6 text-gray-600 mb-5">
-    Writing headlines for blog posts is as much an art as it is a science and
-    probably warrants its own post, but for all advise is with what works for
-    your great &amp; amazing audience.
+    Delivery time may vary based on selected server.
+    If your order is stuck for more than 2 hours, please <a href="">contact us</a>
   </div>
   <div
     class="
@@ -20,16 +19,27 @@
       border-warning border border-dashed
       p-6
     "
+    *ngIf="displayDraftAlert"
   >
     <span class="svg-icon svg-icon-2tx svg-icon-warning me-4"></span>
     <div class="d-flex flex-stack flex-grow-1">
       <div class="fw-bold">
-        <h4 class="text-gray-800 fw-bolder">We need your attention!</h4>
+        <h4 class="text-gray-800 fw-bolder">Order has been saved as draft!</h4>
         <div class="fs-6 text-gray-600">
-          To start using great tools, please, please
-          <a class="fw-bolder cursor-pointer"> Create Team Platform</a>
+          To process order please add sufficient credits and click on 'place order' action button from order history page
+          <br>
+          <a href="/order/history" class="fw-bolder cursor-pointer"> View Order History</a>
+          |
+          <a href="/payment" class="fw-bolder cursor-pointer"> Add Credits</a>
         </div>
       </div>
     </div>
   </div>
+  <!-- <div class="col-xxl-4"> -->
+    <app-lists-widget5 class="card card-xxl-stretch"
+      title="{{ logTitle }}"
+      subtitle="{{ logSubtitle }}"
+      [logs]="orderLogs$ | async"
+    ></app-lists-widget5>
+  <!-- </div> -->
 </div>
